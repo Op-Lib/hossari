@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محمود خليل الحصري - الصفحة الرئيسية</title>
+    <title>القرآن الكريم - جميع السور</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -18,14 +18,10 @@
             min-height: 100vh;
             padding: 20px;
             color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .container {
             max-width: 415px;
-            width: 100%;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -70,15 +66,17 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            font-size: 28px;
             color: white;
-            font-weight: bold;
         }
 
         .header-icon:hover {
             background: #222;
             transform: scale(1.1);
             border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .header-icon i {
+            font-size: 20px;
         }
 
         .app-icon {
@@ -115,245 +113,195 @@
 
         .welcome-section {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             border-radius: 15px;
             overflow: hidden;
         }
 
         .welcome-section img {
-            width: 70%;
+            width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .buttons-container {
+        .categories-grid {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            padding: 5px 0;
+            padding: 10px 0;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-left: 5px;
         }
 
-        .main-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .categories-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .categories-grid::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        .categories-grid::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+
+        .category-btn {
+            background: white;
             border: none;
             border-radius: 12px;
-            padding: 14px;
+            padding: 15px 18px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 15px;
-            font-weight: 700;
+            flex-direction: column;
+            gap: 0;
+            color: #333;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            width: 100%;
         }
 
-        .main-button::before {
+        .category-btn::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .category-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-btn:hover::before {
+            opacity: 1;
+        }
+
+        .category-header {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+            position: relative;
+            z-index: 1;
         }
 
-        .main-button:hover::before {
-            left: 100%;
-        }
-
-        .main-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
-        }
-
-        .main-button i {
+        .category-emoji {
             font-size: 22px;
-        }
-
-        .secondary-button {
-            background: white;
-            color: #511730;
-            border: 3px solid #511730;
-            border-radius: 12px;
-            padding: 13px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            color: #667eea;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            font-size: 15px;
-            font-weight: 600;
         }
 
-        .secondary-button:hover {
+        .category-btn:hover .category-emoji {
+            transform: scale(1.15);
+            color: #764ba2;
+        }
+
+        .category-name {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: right;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .surah-number {
+            font-size: 12px;
+            color: #666;
+            margin-right: 5px;
+        }
+
+        /* مشغل الصوت */
+        .audio-player {
+            display: none;
+            width: 100%;
+            margin-top: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .audio-player.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 150px;
+            }
+        }
+
+        audio {
+            width: 100%;
+            height: 45px;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        /* زر عرض السورة في المصحف */
+        .floating-pdf-btn {
+            display: none;
+            margin-top: 10px;
             background: #511730;
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(81, 23, 48, 0.3);
-        }
-
-        .secondary-button i {
-            font-size: 20px;
-        }
-
-        .about-button {
-            background: #000;
-            color: white;
             border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
+            border-radius: 8px;
+            padding: 10px 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            display: flex;
+            box-shadow: 0 3px 10px rgba(81, 23, 48, 0.3);
+            font-size: 13px;
+            font-weight: 600;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-top: 8px;
-            width: 130px;
-            height: 10px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .about-button:hover {
-            background: #222;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .about-button i {
-            font-size: 16px;
-        }
-
-        /* نافذة الإعلان */
-        .ad-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .ad-overlay.show {
-            display: flex;
-        }
-
-        .ad-modal {
-            background: white;
-            border-radius: 20px;
-            padding: 30px 20px;
-            max-width: 350px;
-            width: 90%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            position: relative;
-            text-align: center;
-            animation: slideUp 0.4s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .ad-close {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            width: 35px;
-            height: 35px;
-            background: #ff4444;
-            border: 3px solid white;
-            border-radius: 50%;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .ad-close:hover {
-            background: #cc0000;
-            transform: scale(1.1);
-        }
-
-        .ad-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .ad-image {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .ad-image:hover {
-            transform: scale(1.05);
-        }
-
-        .ad-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
+            animation: fadeInBtn 0.3s ease-out;
             text-decoration: none;
-            display: inline-block;
         }
 
-        .ad-button:hover {
+        .audio-player.show .floating-pdf-btn {
+            display: flex;
+        }
+
+        .floating-pdf-btn:hover {
+            background: #6b1f42;
             transform: translateY(-2px);
-            box-shadow: 0 7px 20px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 5px 15px rgba(81, 23, 48, 0.4);
         }
 
-        /* تأثيرات الأنيميشن */
-        @keyframes fadeIn {
+        .floating-pdf-btn i {
+            font-size: 16px;
+        }
+
+        @keyframes fadeInBtn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -361,18 +309,24 @@
             }
         }
 
-        .main-button, .secondary-button {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
+        /* ألوان مختلفة للأزرار */
+        .category-btn:nth-child(12n+1) { border-top: 3px solid #ff6b6b; }
+        .category-btn:nth-child(12n+2) { border-top: 3px solid #4ecdc4; }
+        .category-btn:nth-child(12n+3) { border-top: 3px solid #45b7d1; }
+        .category-btn:nth-child(12n+4) { border-top: 3px solid #96ceb4; }
+        .category-btn:nth-child(12n+5) { border-top: 3px solid #feca57; }
+        .category-btn:nth-child(12n+6) { border-top: 3px solid #ff7675; }
+        .category-btn:nth-child(12n+7) { border-top: 3px solid #a29bfe; }
+        .category-btn:nth-child(12n+8) { border-top: 3px solid #fd79a8; }
+        .category-btn:nth-child(12n+9) { border-top: 3px solid #00b894; }
+        .category-btn:nth-child(12n+10) { border-top: 3px solid #74b9ff; }
+        .category-btn:nth-child(12n+11) { border-top: 3px solid #e17055; }
+        .category-btn:nth-child(12n+12) { border-top: 3px solid #6c5ce7; }
 
-        .secondary-button {
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
-
-        .about-button {
-            animation: fadeIn 0.6s ease-out 0.4s forwards;
-            opacity: 0;
+        /* تأثير عند التشغيل */
+        .category-btn.playing {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
         }
 
         @media (max-width: 480px) {
@@ -380,27 +334,17 @@
                 padding: 20px 15px;
             }
 
-            .main-button {
+            .category-emoji {
+                font-size: 24px;
+            }
+
+            .category-name {
                 font-size: 14px;
-                padding: 13px;
             }
 
-            .main-button i {
-                font-size: 20px;
-            }
-
-            .secondary-button {
-                font-size: 14px;
-                padding: 12px;
-            }
-
-            .secondary-button i {
-                font-size: 18px;
-            }
-
-            .about-button {
+            .floating-pdf-btn {
                 font-size: 12px;
-                padding: 9px 18px;
+                padding: 8px 12px;
             }
         }
     </style>
@@ -408,122 +352,246 @@
 <body>
     <div class="container">
         <header>
-            <div class="header-icon" onclick="window.location.href='data/about.html'" title="حول التطبيق">
-                ?
+            <div class="header-icon" onclick="goBack()" title="الصفحة الرئيسية">
+                <i class="fas fa-home"></i>
             </div>
             <div class="header-center">
                 <div class="title">محمود خليل الحصري</div>
-                <div class="subtitle">القرآن الكريم كاملاً</div>
+                <div class="subtitle">جميع سور القرآن الكريم</div>
             </div>
-            <img src="data/icon.png" alt="App Icon" class="app-icon" title="التطبيق">
+            <img src="icon.png" alt="App Icon" class="app-icon" title="التطبيق">
         </header>
 
         <div class="welcome-section">
-            <img src="data/img.png" alt="القارئ">
+            <img src="img.png" alt="القارئ">
         </div>
 
-        <div class="buttons-container">
-            <button class="main-button" onclick="window.location.href='data/index.html'" title="الاستماع إلى القرآن الكريم">
-                <i class="fas fa-play-circle"></i>
-                <span>الاستماع إلى محمود خليل الحصري MP3</span>
-            </button>
-
-            <button class="main-button" onclick="window.location.href='data/sora.html'" title="قراءة المصحف">
-                <i class="fas fa-book-open"></i>
-                <span>قراءة المصحف - محمود خليل الحصري</span>
-            </button>
-
-            <button class="secondary-button" onclick="window.location.href='https://fatoratie.github.io/koran/'" title="تحميل المصحف PDF">
-                <i class="fas fa-book-open"></i>
-                <span>تحميل المصحف PDF</span>
-            </button>
-
-            <button class="about-button" onclick="window.location.href='data/about.html'" title="معلومات عن التطبيق">
-                <i class="fas fa-info-circle"></i>
-                <span>حول التطبيق</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- نافذة الإعلان -->
-    <div class="ad-overlay" id="adOverlay">
-        <div class="ad-modal">
-            <div class="ad-close" onclick="closeAd()">&times;</div>
-            <div class="ad-title">شارك معنا و استمتع بالألعاب المجانية</div>
-            <img src="data/game1.png" alt="لعبة" class="ad-image" onclick="openGameLink()">
-            <a href="https://play2466.gamereo.com/start" target="_blank" class="ad-button">
-                ابدأ اللعب الآن
-            </a>
-        </div>
+        <div class="categories-grid" id="surahsList"></div>
     </div>
 
     <script>
-        // نظام الإعلان
-        function showAd() {
-            document.getElementById('adOverlay').classList.add('show');
-        }
+        const surahs = [
+            "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال",
+            "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل",
+            "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور",
+            "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة",
+            "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+            "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح",
+            "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة",
+            "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن",
+            "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن",
+            "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس",
+            "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية",
+            "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق",
+            "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة",
+            "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص",
+            "الفلق", "الناس"
+        ];
 
-        function closeAd() {
-            document.getElementById('adOverlay').classList.remove('show');
-        }
-
-        function openGameLink() {
-            window.open('https://play2466.gamereo.com/start', '_blank');
-        }
-
-        // إغلاق الإعلان عند النقر خارج النافذة
-        document.getElementById('adOverlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeAd();
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'home.html';
             }
-        });
+        }
 
-        // عرض الإعلان بعد 10 ثواني من تحميل الصفحة
-        setTimeout(showAd, 15000);
+        // دالة لفتح السورة في المصحف مع الحفاظ على تشغيل الصوت
+        function openSurahPage(surahNumber, audioElement) {
+            // حفظ حالة الصوت الحالية
+            const currentTime = audioElement.currentTime;
+            const isPlaying = !audioElement.paused;
+            
+            // حفظ معلومات الصوت في localStorage
+            localStorage.setItem('audioState', JSON.stringify({
+                surahNumber: surahNumber,
+                currentTime: currentTime,
+                isPlaying: isPlaying,
+                audioSrc: audioElement.src
+            }));
+            
+            // فتح صفحة السورة
+            window.location.href = `sora/${surahNumber}.html`;
+        }
 
-        // تكرار عرض الإعلان كل 20 ثانية
-        setInterval(showAd, 30000);
-
-        // تأثير النقر على الأزرار
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // تأثير الموجة عند النقر
-                const ripple = document.createElement('span');
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
-                ripple.style.width = '20px';
-                ripple.style.height = '20px';
-                ripple.style.animation = 'ripple 0.6s ease-out';
-                
-                const rect = this.getBoundingClientRect();
-                ripple.style.left = (e.clientX - rect.left - 10) + 'px';
-                ripple.style.top = (e.clientY - rect.top - 10) + 'px';
-                
-                this.style.position = 'relative';
-                this.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
+        const surahsList = document.getElementById('surahsList');
+        
+        surahs.forEach((surah, index) => {
+            const surahNumber = index + 1;
+            const audioSrc = `audio/${surahNumber}.mp3`;
+            
+            const surahDiv = document.createElement('div');
+            surahDiv.className = 'category-btn';
+            surahDiv.innerHTML = `
+                <div class="category-header">
+                    <div class="category-emoji"><i class="fas fa-volume-up"></i></div>
+                    <div class="category-name">
+                        <span class="surah-number">${surahNumber}.</span> ${surah}
+                    </div>
+                </div>
+                <div class="audio-player">
+                    <audio controls preload="metadata">
+                        <source src="${audioSrc}" type="audio/mpeg">
+                    </audio>
+                    <button class="floating-pdf-btn" data-surah="${surahNumber}">
+                        <i class="fas fa-book-open"></i>
+                        <span>عرض السورة في المصحف</span>
+                    </button>
+                </div>
+            `;
+            
+            const header = surahDiv.querySelector('.category-header');
+            const audioPlayer = surahDiv.querySelector('.audio-player');
+            const audio = surahDiv.querySelector('audio');
+            const pdfBtn = surahDiv.querySelector('.floating-pdf-btn');
+            
+            // عند النقر على زر المصحف
+            pdfBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openSurahPage(surahNumber, audio);
             });
+            
+            // عند النقر على اسم السورة
+            header.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // إخفاء جميع المشغلات الأخرى
+                document.querySelectorAll('.audio-player').forEach(player => {
+                    if (player !== audioPlayer) {
+                        player.classList.remove('show');
+                        const otherAudio = player.querySelector('audio');
+                        if (otherAudio) {
+                            otherAudio.pause();
+                            otherAudio.currentTime = 0;
+                        }
+                    }
+                });
+                
+                // إزالة كلاس playing من جميع الأزرار
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    if (btn !== surahDiv) {
+                        btn.classList.remove('playing');
+                    }
+                });
+                
+                // تبديل حالة المشغل الحالي
+                if (audioPlayer.classList.contains('show')) {
+                    audioPlayer.classList.remove('show');
+                    audio.pause();
+                    audio.currentTime = 0;
+                    surahDiv.classList.remove('playing');
+                } else {
+                    audioPlayer.classList.add('show');
+                    surahDiv.classList.add('playing');
+                    // التشغيل التلقائي بعد النقر مباشرة
+                    setTimeout(() => {
+                        audio.play().catch(err => {
+                            console.log('تحتاج إلى التفاعل مع الصفحة أولاً');
+                        });
+                    }, 100);
+                }
+            });
+            
+            // عند بدء التشغيل
+            audio.addEventListener('play', function() {
+                surahDiv.classList.add('playing');
+                
+                // إيقاف أي صوت آخر
+                document.querySelectorAll('audio').forEach(otherAudio => {
+                    if (otherAudio !== audio && !otherAudio.paused) {
+                        otherAudio.pause();
+                    }
+                });
+            });
+            
+            // عند الإيقاف
+            audio.addEventListener('pause', function() {
+                if (audio.currentTime === 0 || audio.ended) {
+                    surahDiv.classList.remove('playing');
+                }
+            });
+            
+            // عند انتهاء السورة
+            audio.addEventListener('ended', function() {
+                // الانتقال التلقائي للسورة التالية
+                if (surahNumber < surahs.length) {
+                    setTimeout(() => {
+                        const nextBtn = surahsList.children[surahNumber];
+                        if (nextBtn) {
+                            // إخفاء المشغل الحالي
+                            audioPlayer.classList.remove('show');
+                            surahDiv.classList.remove('playing');
+                            
+                            // فتح وتشغيل السورة التالية
+                            const nextHeader = nextBtn.querySelector('.category-header');
+                            const nextAudioPlayer = nextBtn.querySelector('.audio-player');
+                            const nextAudio = nextBtn.querySelector('audio');
+                            
+                            if (nextAudioPlayer && nextAudio) {
+                                // إظهار المشغل التالي
+                                nextAudioPlayer.classList.add('show');
+                                nextBtn.classList.add('playing');
+                                
+                                // التمرير للسورة التالية
+                                nextBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                
+                                // تشغيل السورة التالية تلقائياً
+                                setTimeout(() => {
+                                    nextAudio.play().catch(err => {
+                                        console.log('خطأ في التشغيل التلقائي');
+                                    });
+                                }, 500);
+                            }
+                        }
+                    }, 500);
+                } else {
+                    // انتهت جميع السور
+                    audioPlayer.classList.remove('show');
+                    surahDiv.classList.remove('playing');
+                }
+            });
+            
+            surahsList.appendChild(surahDiv);
         });
 
-        // إضافة الأنيميشن للموجة
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                0% {
-                    width: 0;
-                    height: 0;
-                    opacity: 0.5;
+        // استرجاع حالة الصوت عند العودة من صفحة السورة
+        window.addEventListener('load', function() {
+            const audioState = localStorage.getItem('audioState');
+            if (audioState) {
+                const state = JSON.parse(audioState);
+                const surahIndex = state.surahNumber - 1;
+                const surahBtn = surahsList.children[surahIndex];
+                
+                if (surahBtn) {
+                    const audioPlayer = surahBtn.querySelector('.audio-player');
+                    const audio = surahBtn.querySelector('audio');
+                    
+                    if (audioPlayer && audio) {
+                        // إظهار المشغل
+                        audioPlayer.classList.add('show');
+                        surahBtn.classList.add('playing');
+                        
+                        // استرجاع الوقت الحالي
+                        audio.currentTime = state.currentTime;
+                        
+                        // استئناف التشغيل إذا كان يعمل
+                        if (state.isPlaying) {
+                            setTimeout(() => {
+                                audio.play().catch(err => {
+                                    console.log('خطأ في استئناف التشغيل');
+                                });
+                            }, 100);
+                        }
+                        
+                        // التمرير للسورة
+                        surahBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                 }
-                100% {
-                    width: 100px;
-                    height: 100px;
-                    opacity: 0;
-                }
+                
+                // حذف البيانات المحفوظة
+                localStorage.removeItem('audioState');
             }
-        `;
-        document.head.appendChild(style);
+        });
     </script>
 </body>
 </html>
