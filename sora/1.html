@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سورة </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 100px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 415px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            border-radius: 20px 20px 0 0;
+            z-index: 10;
+        }
+
+        header {
+            background: #511730;
+            color: white;
+            padding: 20px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 5;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .header-icon:hover {
+            background: #222;
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .header-icon i {
+            font-size: 20px;
+        }
+
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .app-icon:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .header-center {
+            flex: 1;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 20px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+        }
+
+        .content-area {
+            padding: 30px 25px;
+            background: white;
+            border-radius: 0 0 20px 20px;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .decorative-frame {
+            background: linear-gradient(145deg, #fdfbf7 0%, #f8f6f0 100%);
+            border-radius: 15px;
+            padding: 30px 20px;
+            position: relative;
+            box-shadow: 
+                inset 0 0 0 3px #d4af37,
+                inset 0 0 0 6px #fdfbf7,
+                inset 0 0 0 9px #c9a961,
+                0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            color: #d4af37;
+            font-size: 45px;
+            opacity: 0.8;
+        }
+
+        .corner-decoration.top-right {
+            top: -8px;
+            right: -8px;
+            transform: rotate(90deg);
+        }
+
+        .corner-decoration.top-left {
+            top: -8px;
+            left: -8px;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: -8px;
+            right: -8px;
+            transform: rotate(180deg);
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: -8px;
+            left: -8px;
+            transform: rotate(270deg);
+        }
+
+        .surah-text {
+            font-family: 'Amiri Quran', 'Scheherazade New', serif;
+            font-size: 28px;
+            line-height: 2.2;
+            color: #1a1a1a;
+            text-align: justify;
+            direction: rtl;
+            padding: 15px;
+            letter-spacing: 1px;
+            word-spacing: 3px;
+        }
+
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.02) 10px, rgba(212, 175, 55, 0.02) 20px);
+            pointer-events: none;
+            border-radius: 15px;
+        }
+
+        /* مشغل الصوت الثابت في الأسفل */
+        .fixed-audio-player {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 415px;
+            width: calc(100% - 40px);
+            background: rgba(81, 23, 48, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideUp 0.6s ease-out;
+            border-radius: 15px;
+            border: 2px solid #d4af37;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fixed-player-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fixed-player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .fixed-player-title {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+        }
+
+        .fixed-player-title i {
+            color: #feca57;
+            font-size: 16px;
+        }
+
+        .fixed-close-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: all 0.3s ease;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .fixed-close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .fixed-audio-player audio {
+            width: 100%;
+            border-radius: 10px;
+            height: 40px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+                padding-bottom: 110px;
+            }
+
+            .container {
+                max-width: 100%;
+                border-radius: 15px;
+            }
+
+            .title {
+                font-size: 18px;
+            }
+
+            .subtitle {
+                font-size: 11px;
+            }
+
+            .header-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .header-icon i {
+                font-size: 18px;
+            }
+
+            .app-icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .content-area {
+                padding: 20px 15px;
+            }
+
+            .decorative-frame {
+                padding: 25px 15px;
+            }
+
+            .surah-text {
+                font-size: 22px;
+                line-height: 1.9;
+                padding: 10px;
+            }
+
+            .corner-decoration {
+                width: 35px;
+                height: 35px;
+                font-size: 35px;
+            }
+
+            .fixed-audio-player {
+                padding: 12px 15px;
+                bottom: 10px;
+                width: calc(100% - 20px);
+            }
+
+            .fixed-player-title {
+                font-size: 13px;
+            }
+
+            .fixed-audio-player audio {
+                height: 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-icon" onclick="goBack()" title="الصفحة الرئيسية">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="header-center">
+                <div class="title">محمود خليل الحصري</div>
+                <div class="subtitle">سورة الفاتحة</div>
+            </div>
+            <img src="icon.png" alt="App Icon" class="app-icon" title="القرآن الكريم">
+        </header>
+
+        <div class="content-area">
+            <div class="decorative-frame">
+                <div class="corner-decoration top-right">❖</div>
+                <div class="corner-decoration top-left">❖</div>
+                <div class="corner-decoration bottom-right">❖</div>
+                <div class="corner-decoration bottom-left">❖</div>
+                <div class="pattern-overlay"></div>
+
+                <div class="surah-text">
+                    بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ (1) ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ (2) ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ (3) مَٰلِكِ يَوۡمِ ٱلدِّينِ (4) إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ (5) ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ (6) صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ (7)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مشغل الصوت الثابت في الأسفل -->
+    <div class="fixed-audio-player" id="fixedAudioPlayer">
+        <div class="fixed-player-content">
+            <div class="fixed-player-header">
+                <div class="fixed-player-title">
+                    <i class="fas fa-play-circle"></i>
+                    <span>سورة الفاتحة - محمود خليل الحصري</span>
+                </div>
+                <button class="fixed-close-btn" onclick="closePlayer()" title="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <audio id="audioElement" controls preload="auto" autoplay>
+                <source src="../audio/1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '../index.html';
+            }
+        }
+
+        function closePlayer() {
+            const player = document.getElementById('fixedAudioPlayer');
+            const audio = document.getElementById('audioElement');
+            audio.pause();
+            player.style.display = 'none';
+        }
+
+        // التشغيل التلقائي عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('audioElement');
+            
+            // محاولة التشغيل التلقائي
+            setTimeout(() => {
+                audio.play().catch(err => {
+                    console.log('يرجى التفاعل مع الصفحة لتشغيل الصوت تلقائياً');
+                });
+            }, 500);
+
+            // استرجاع حالة الصوت من localStorage إذا كانت موجودة
+            const audioState = localStorage.getItem('audioState');
+            if (audioState) {
+                const state = JSON.parse(audioState);
+                
+                // التأكد من أن رقم السورة يتطابق
+                if (state.surahNumber === 1) {
+                    audio.currentTime = state.currentTime || 0;
+                    
+                    if (state.isPlaying) {
+                        setTimeout(() => {
+                            audio.play().catch(err => {
+                                console.log('خطأ في استئناف التشغيل');
+                            });
+                        }, 100);
+                    }
+                }
+                
+                // حذف البيانات المحفوظة
+                localStorage.removeItem('audioState');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الكريم - جميع السور</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 415px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            border-radius: 20px 20px 0 0;
+        }
+
+        header {
+            background: #511730;
+            color: white;
+            padding: 20px;
+            margin: -30px -20px 25px -20px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .header-icon:hover {
+            background: #222;
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .app-icon:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .header-center {
+            flex: 1;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 20px;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .welcome-section img {
+            width: 70%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .categories-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 0;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-left: 5px;
+        }
+
+        .categories-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .categories-grid::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        .categories-grid::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+
+        .category-btn {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+            min-height: 50px;
+            width: 100%;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-btn:hover::before {
+            opacity: 1;
+        }
+
+        .category-btn:active {
+            transform: translateX(-2px);
+        }
+
+        .category-emoji {
+            font-size: 24px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .category-btn:hover .category-emoji {
+            transform: scale(1.15);
+        }
+
+        .category-name {
+            font-size: 15px;
+            font-weight: 600;
+            text-align: right;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .surah-number {
+            font-size: 12px;
+            color: #666;
+            margin-right: 5px;
+        }
+
+        /* ألوان مختلفة للأزرار */
+        .category-btn:nth-child(12n+1) { border-top: 3px solid #ff6b6b; }
+        .category-btn:nth-child(12n+2) { border-top: 3px solid #4ecdc4; }
+        .category-btn:nth-child(12n+3) { border-top: 3px solid #45b7d1; }
+        .category-btn:nth-child(12n+4) { border-top: 3px solid #96ceb4; }
+        .category-btn:nth-child(12n+5) { border-top: 3px solid #feca57; }
+        .category-btn:nth-child(12n+6) { border-top: 3px solid #ff7675; }
+        .category-btn:nth-child(12n+7) { border-top: 3px solid #a29bfe; }
+        .category-btn:nth-child(12n+8) { border-top: 3px solid #fd79a8; }
+        .category-btn:nth-child(12n+9) { border-top: 3px solid #00b894; }
+        .category-btn:nth-child(12n+10) { border-top: 3px solid #74b9ff; }
+        .category-btn:nth-child(12n+11) { border-top: 3px solid #e17055; }
+        .category-btn:nth-child(12n+12) { border-top: 3px solid #6c5ce7; }
+
+        /* تأثيرات الأنيميشن */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-btn {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .category-emoji {
+                font-size: 20px;
+            }
+
+            .category-name {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+           <div class="header-icon" onclick="goBack()" title="الصفحة الرئيسية">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="header-center">
+                <div class="title">محمود خليل الحصري</div>
+                <div class="subtitle">جميع سور القرآن الكريم</div>
+            </div>
+            <img src="icon.png" alt="App Icon" class="app-icon" title="التطبيق">
+        </header>
+
+        <div class="welcome-section">
+            <img src="img.png" alt="القارئ">
+        </div>
+
+        <div class="categories-grid" id="surahsList">
+        </div>
+    </div>
+
+    <script>
+        const surahs = [
+            "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال",
+            "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل",
+            "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور",
+            "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة",
+            "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+            "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح",
+            "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة",
+            "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن",
+            "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن",
+            "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس",
+            "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية",
+            "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق",
+            "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة",
+            "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص",
+            "الفلق", "الناس"
+        ];
+
+        const surahsList = document.getElementById('surahsList');
+        
+        surahs.forEach((surah, index) => {
+            const surahNumber = index + 1;
+            const btn = document.createElement('button');
+            btn.className = 'category-btn';
+            btn.onclick = () => openSurah(surahNumber);
+            btn.innerHTML = `
+                <div class="category-emoji">📖</div>
+                <div class="category-name">
+                    <span class="surah-number">${surahNumber}.</span> ${surah}
+                </div>
+            `;
+            // إضافة تأخير للأنيميشن
+            btn.style.animationDelay = `${index * 0.02}s`;
+            btn.style.opacity = '0';
+            surahsList.appendChild(btn);
+        });
+
+        function openSurah(surahNumber) {
+            window.location.href = `sora/${surahNumber}.html`;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // تأثير التمرير على الأزرار
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+    </script>
+</body>
+</html>
